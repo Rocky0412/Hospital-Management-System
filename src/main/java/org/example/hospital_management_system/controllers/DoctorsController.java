@@ -1,6 +1,4 @@
 package org.example.hospital_management_system.controllers;
-
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/patients")
-public class PatientController {
+@RequestMapping("/api/v1/doctors")
+public class DoctorsController {
     @GetMapping("/")
     public <T> ResponseEntity<List<T>> findAll() {
         System.out.println("Fetching all patients");
@@ -35,5 +33,4 @@ public class PatientController {
         System.out.println("Deleting patient " + id);
         return (ResponseEntity<?>) ResponseEntity.ok(id);
     }
-
 }
