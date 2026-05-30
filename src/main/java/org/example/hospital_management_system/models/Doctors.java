@@ -1,7 +1,10 @@
 package org.example.hospital_management_system.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,5 +19,8 @@ public class Doctors {
     private  Long id;
     private String name;
     private String specialty;
+    @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
+    List<Appointments> appointments;
 
 }

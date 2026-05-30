@@ -1,7 +1,7 @@
 package org.example.hospital_management_system.controllers;
-
-
+import org.example.hospital_management_system.models.Appointments;
 import org.example.hospital_management_system.models.Patients;
+import org.example.hospital_management_system.repositories.PatientRepository;
 import org.example.hospital_management_system.services.PatientServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +47,11 @@ public class PatientController {
         System.out.println("Deleting patient " + id);
         patientServices.deletePatient(id);
         return (ResponseEntity<?>) ResponseEntity.ok(id);
+    }
+    @GetMapping("/appointment/{id}")
+    public ResponseEntity<List<Appointments>> findAllAppointment(@PathVariable long id) {
+      return ResponseEntity.ok(patientServices.getAppointmentsByPatientId(id));
+
     }
 
 }

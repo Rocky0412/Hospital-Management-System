@@ -1,6 +1,7 @@
 package org.example.hospital_management_system.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,10 @@ public class Patients {
     private String surname;
     @Column(length = 100,nullable = false)
     private String email;
-    @OneToOne(mappedBy = "patients")
-    private Bill billing;
+    @OneToMany(mappedBy = "patients")
+    private List<Bill> billing;
+    @OneToMany(mappedBy = "patient")
+    @JsonIgnore
+    List<Appointments> appointments;
 
 }

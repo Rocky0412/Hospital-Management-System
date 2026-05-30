@@ -18,7 +18,11 @@ public class Bill {
     private long amount;
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
-   private Patients patients;
+    private Patients patients;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "appointment_id")
+    private Appointments appointment;
+
 }

@@ -1,10 +1,12 @@
 package org.example.hospital_management_system.services;
 
 
+import org.example.hospital_management_system.models.Appointments;
 import org.example.hospital_management_system.models.Patients;
 import org.example.hospital_management_system.repositories.PatientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,7 +55,10 @@ public class PatientServices {
     }
     public void deletePatient(Long id){
         System.out.println("Deleting patient " + id);
-       patientRepository.deleteById(id);
+        patientRepository.deleteById(id);
 
+    }
+    public List<Appointments> getAppointmentsByPatientId(long id){
+        return patientRepository.findById(id).get().getAppointments();
     }
 }

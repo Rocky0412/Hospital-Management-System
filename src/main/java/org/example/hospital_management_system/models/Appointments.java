@@ -17,9 +17,15 @@ public class Appointments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn()
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id")
     private Patients patient;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
+    private Doctors doctor;
+    @OneToOne(mappedBy = "appointment")
+    private Bill billing;
     private Date appointmentDate;
-    private Date date;
+
+
 }
