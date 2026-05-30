@@ -15,8 +15,10 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long patientId;
     private long amount;
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id", nullable = false)
+   private Patients patients;
 }

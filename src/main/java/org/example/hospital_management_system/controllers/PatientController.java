@@ -6,7 +6,6 @@ import org.example.hospital_management_system.services.PatientServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,30 +17,29 @@ public class PatientController {
         this.patientServices = patientServices;
 
     }
-    @GetMapping("/")
+    @GetMapping
     public <T> ResponseEntity<List<T>> findAllPatients() {
         System.out.println("Fetching all patients");
-        patientServices.getPatients();
-        return ResponseEntity.ok().body(new ArrayList<>());
+        List<Patients>patients=patientServices.getPatients();
+        return ResponseEntity.ok().body((List<T>) patients);
     }
     @PostMapping
-    public <T> ResponseEntity<T> createNewPatient(@RequestBody T patient) {
+    public ResponseEntity<?> createNewPatient(@RequestBody Patients patient) {
         System.out.println("Saving patient " + patient);
         patientServices.addPatient((Patients) patient);
 
         return ResponseEntity.ok().body(patient);
     }
     @GetMapping("/{id}")
-    public <T> ResponseEntity<T> findById(@PathVariable long id) {
+    public <T> Patients findById(@PathVariable long id) {
         System.out.println("Fetching patient " + id);
-        patientServices.getPatientById(id);
-        return null;
+        return patientServices.getPatientById(id);
 
     }
     @PutMapping("/{id}")
-    public <T> ResponseEntity<T> update(@PathVariable long id, @RequestBody T patient) {
+    public <T> ResponseEntity<T> update(@PathVariable long id, @RequestBody Patients patient) {
         System.out.println("Updating patient " + id);
-        patientServices.updatePatient(id,(Patients) patient);
+        patientServices.updatePatient(id, patient);
         return (ResponseEntity<T>) ResponseEntity.ok(patient);
     }
     @DeleteMapping("/{id}")

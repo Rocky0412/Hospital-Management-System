@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity(name = "patients")
 @Data
 @NoArgsConstructor
@@ -16,9 +18,12 @@ import lombok.NoArgsConstructor;
 public class Patients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long id;
+    private  Long id;
     private String name;
     private String surname;
     @Column(length = 100,nullable = false)
     private String email;
+    @OneToOne(mappedBy = "patients")
+    private Bill billing;
+
 }

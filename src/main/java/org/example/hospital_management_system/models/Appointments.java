@@ -17,7 +17,9 @@ public class Appointments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long  doctorId;
-    private long  patientId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn()
+    private Patients patient;
+    private Date appointmentDate;
     private Date date;
 }
